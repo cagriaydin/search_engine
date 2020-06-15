@@ -23,7 +23,7 @@ class _RangeSliderBuilderState extends State<RangeSliderBuilder> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: const EdgeInsets.fromLTRB(24,54,24,24),
       child: FlutterSlider(
           tooltip: FlutterSliderTooltip(
             alwaysShowTooltip: true,
@@ -42,7 +42,6 @@ class _RangeSliderBuilderState extends State<RangeSliderBuilder> {
           handlerWidth: 30,
           values: [1942, 2020],
           rangeSlider: true,
-          rtl: false,
           min: 1942,
           max: 2020,
           rightHandler: handler,

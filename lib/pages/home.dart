@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:search_engine/pages/search.dart';
 import 'package:search_engine/widgets/category.dart';
-import 'package:search_engine/widgets/range_slider.dart';
 import 'package:search_engine/widgets/search.dart';
 import 'package:search_engine/widgets/slider.dart';
 import 'package:search_engine/widgets/type.dart';
@@ -36,11 +36,14 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              SearchBuilder(),
-              SizedBox(
-                height: 50,
+              GestureDetector(
+                onTap: () => Navigator.push(context, MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return SearchPage();
+                  },
+                )),
+                child: SearchBuilder(),
               ),
-              RangeSliderBuilder()
             ],
           ),
         ),
