@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_engine/widgets/category.dart';
+import 'package:search_engine/widgets/range_slider.dart';
+import 'package:search_engine/widgets/search.dart';
 import 'package:search_engine/widgets/slider.dart';
 import 'package:search_engine/widgets/type.dart';
 
@@ -18,18 +20,29 @@ class HomePage extends StatelessWidget {
         elevation: 0,
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            CategoryBuilder(),
-            SizedBox(
-              height: 20,
-            ),
-            TypeBuilder(),
-            SizedBox(
-              height: 50,
-            ),
-            SliderBuilder(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CategoryBuilder(),
+              SizedBox(
+                height: 20,
+              ),
+              TypeBuilder(),
+              SizedBox(
+                height: 50,
+              ),
+              Container(),
+              SliderBuilder(),
+              SizedBox(
+                height: 50,
+              ),
+              SearchBuilder(),
+              SizedBox(
+                height: 50,
+              ),
+              RangeSliderBuilder()
+            ],
+          ),
         ),
       ),
     );

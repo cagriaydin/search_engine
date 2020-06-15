@@ -13,16 +13,13 @@ class BlurBuilder extends StatelessWidget {
         ? Stack(
             fit: StackFit.expand,
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(90)),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 5.0,
-                    sigmaY: 5.0,
-                  ),
-                  child: Container(
-                    color: Colors.transparent,
-                  ),
+              BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 5.0,
+                  sigmaY: 5.0,
+                ),
+                child: Container(
+                  color: Colors.transparent,
                 ),
               ),
               child,
