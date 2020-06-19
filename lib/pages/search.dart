@@ -1,6 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:search_engine/widgets/range_slider.dart';
+import 'package:search_engine/widgets/tag.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -8,11 +9,15 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  ExpandableController controller = ExpandableController();
+  ExpandableController filmController = ExpandableController();
+  ExpandableController yearController = ExpandableController();
+  ExpandableController tagController = ExpandableController();
 
   @override
   void initState() {
-    controller.toggle();
+    filmController.toggle();
+    yearController.toggle();
+    tagController.toggle();
     super.initState();
   }
 
@@ -36,6 +41,25 @@ class _SearchPageState extends State<SearchPage> {
             header: Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
               child: Text(
+                "Film seç",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            expanded: Container(),
+            controller: filmController,
+          ),
+          ExpandablePanel(
+            theme: ExpandableThemeData(
+              iconColor: Colors.white,
+              iconSize: 32,
+            ),
+            header: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
+              child: Text(
                 "Yapım yılı seç",
                 style: TextStyle(
                   fontSize: 24,
@@ -45,7 +69,26 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             expanded: RangeSliderBuilder(),
-            controller: controller,
+            controller: yearController,
+          ),
+          ExpandablePanel(
+            theme: ExpandableThemeData(
+              iconColor: Colors.white,
+              iconSize: 32,
+            ),
+            header: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
+              child: Text(
+                "Anahtar kelime seç",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            expanded: TagBuilder(),
+            controller: tagController,
           ),
         ],
       ),
