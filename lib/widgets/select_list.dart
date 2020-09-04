@@ -1,84 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:search_engine/widgets/blur.dart';
+import 'package:select_filter/select_filter.dart';
 
-class SelectListBuilder extends StatelessWidget {
-  final Function(int) onChange;
-  final List<String> typeList;
-  int selectedIndex;
+class SelectListBuilder extends StatefulWidget {
+  SelectListBuilder({
+    this.selectedKey,
+    this.selectedValue,
+  });
 
-  SelectListBuilder({this.onChange, this.typeList, this.selectedIndex});
+  final String selectedKey;
+  final int selectedValue;
+
+  @override
+  _TypeBuilderState createState() => _TypeBuilderState();
+}
+
+class _TypeBuilderState extends State<SelectListBuilder> {
+  String selectedType;
+  int selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedType = widget.selectedKey;
+    selectedValue = widget.selectedValue;
+  }
+
+  var selectList = [
+    "Western",
+    "Animasyon",
+    "Bilim Kurgu",
+    "Dram",
+    "Gizem",
+    "Korku",
+    "Komedi",
+    "Western",
+    "Animasyon",
+    "Bilim Kurgu",
+    "Dram",
+    "Gizem",
+    "Korku",
+    "Komedi"
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => Navigator.pop(context),
-      child: Material(
-        color: Colors.black54,
-        child: BlurBuilder(
-          isVisible: true,
-          child: Center(
-            child: Container(
-              width: 210,
-              height: size.height,
-              child: new Swiper(
-                itemBuilder: (BuildContext context, int index) {
-                  return Center(
-                    child: Text(
-                      typeList[index],
-                      style: TextStyle(
-                          color: getColor(index),
-                          fontSize: getFontSize(index),
-                          fontWeight: getFontWeight(index)),
-                    ),
-                  );
-                },
-                onIndexChanged: (index) => selectedIndex = index,
-                scrollDirection: Axis.vertical,
-                itemCount: typeList.length,
-                viewportFraction: 0.1,
-                loop: false,
-                index: selectedIndex ?? 0,
-                onTap: (index) {
-                  onChange(index);
-                  Navigator.pop(context);
-                },
-              ),
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            pageBuilder: (BuildContext context, _, __) => SelectFilterBuilder(
+              onChange: onChange,
+              selectList: selectList,
+              selectedIndex: selectedValue ?? 0,
             ),
           ),
+        );
+      },
+      child: Container(
+        width: 150,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            selectedType ?? "Tür Seçiniz",
+            style: TextStyle(
+              color: Color(0xFFBFFFD5),
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Color(0xFFBFFFD5),
+            width: 3,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
       ),
     );
   }
 
-  double getFontSize(int index) {
-    if (selectedIndex == index) {
-      return 35;
-    }
-    if (selectedIndex + 1 == index || selectedIndex - 1 == index) {
-      return 23;
-    }
-    return 18;
-  }
-
-  Color getColor(int index) {
-    if (selectedIndex == index) {
-      return Color(0xFFBFFFD5);
-    }
-    if (selectedIndex + 1 == index || selectedIndex - 1 == index) {
-      return Color(0xFFBFFFD5).withOpacity(.7);
-    }
-    return Color(0xFFBFFFD5).withOpacity(.4);
-  }
-
-  FontWeight getFontWeight(int index) {
-    if (selectedIndex == index) {
-      return FontWeight.bold;
-    }
-    if (selectedIndex + 1 == index || selectedIndex - 1 == index) {
-      return FontWeight.w500;
-    }
-    return FontWeight.w300;
+  onChange(int key) {
+    setState(() {
+      selectedType = selectList[key];
+      selectedValue = key;
+    });
   }
 }

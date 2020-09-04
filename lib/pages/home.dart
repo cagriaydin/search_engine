@@ -3,7 +3,7 @@ import 'package:search_engine/pages/search.dart';
 import 'package:search_engine/widgets/category.dart';
 import 'package:search_engine/widgets/search.dart';
 import 'package:search_engine/widgets/slider.dart';
-import 'package:search_engine/widgets/type.dart';
+import 'package:search_engine/widgets/select_list.dart';
 
 class HomePage extends StatelessWidget {
   final String type;
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              TypeBuilder(),
+              SelectListBuilder(),
               SizedBox(
                 height: 50,
               ),
